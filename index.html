@@ -1,1 +1,954 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Evaluating mathematical reasoning of foundation models in visual contexts">
+  <meta name="keywords" content="MM-NIAH">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> MM-NIAH</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
+  <!-- <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+/Users/panlu/Library/Mobile Documents/com~apple~CloudDocs/ImageMath/visual-mathqa-server/data_final/images
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script> -->
+
+  <link rel="icon" href="./static/images/mm-niah.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/leaderboard.css">
+  <link rel="stylesheet" href="./static/css/table_generator.css">
+
+  <!-- <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_bulma.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script> -->
+  <script type="text/javascript" src="static/js/sort-table.js" defer></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/explorer-index.js"></script>
+  <script src="./static/js/question_card.js"></script>
+
+  <script src="./static/js/leaderboard_testmini.js"></script>
+  <script src="./data/results/output_folders.js" defer></script>
+  <script src="./data/results/model_scores.js" defer></script>
+
+  <script src="./visualizer/data/data_public.js" defer></script>
+
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title is-bold">
+              <img src="static/images/mm-niah.png" style="width:1em;vertical-align: middle" alt="Logo" />
+              <span class="mm-niah" style="vertical-align: middle">mm-niah</span>
+            </h1>
+            <h2 class="subtitle is-3 publication-subtitle">
+              Needle In A Multimodal Haystack
+            </h2>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Weiyun Wang<sup style="color:#ffac33;">2</sup><sup>,</sup><sup
+                  style="color:#6fbf73;">1</sup><sup>*</sup>,</span>
+              <span class="author-block">Shuibo Zhang<sup style="color:#6fbf73;">1</sup><sup>*</sup>,</span>
+              <span class="author-block">Yiming Ren<sup style="color:#ed4b82;">3</sup><sup>,</sup><sup
+                  style="color:#6fbf73;">1</sup><sup>*</sup>,</span>
+              <span class="author-block">Yuchen Duan<sup style="color:#007bff;">4</sup><sup>,</sup><sup
+                  style="color:#6fbf73;">1</sup><sup>*</sup>,</span>
+              <span class="author-block">Tiantong Li<sup style="color:#ed4b82;">3</sup><sup>,</sup><sup
+                  style="color:#6fbf73;">1</sup><sup>*</sup>,</span>
+              <br>
+              <span class="author-block">Shuo Liu<sup style="color:#6fbf73;">1</sup>,</span>
+              <span class="author-block">Mengkang Hu<sup style="color:#7befe5;">7</sup><sup>,</sup><sup
+                  style="color:#6fbf73;">1</sup>,</span>
+              <span class="author-block">Zhe Chen<sup style="color:#9b51e0;">5</sup><sup>,</sup><sup
+                  style="color:#6fbf73;">1</sup>,</span>
+              <span class="author-block">Kaipeng Zhang<sup style="color:#6fbf73;">1</sup>,</span>
+              <span class="author-block">Lewei Lu<sup style="color:#1b1be0;">6</sup>,</span>
+              <span class="author-block">Xizhou Zhu<sup style="color:#ed4b82;">3</sup><sup>,</sup><sup
+                  style="color:#6fbf73;">1</sup><sup>,</sup><sup style="color:#1b1be0;">6</sup>,</span>
+              <br>
+              <span class="author-block">Ping Luo<sup style="color:#7befe5;">7</sup><sup>,</sup><sup
+                  style="color:#6fbf73;">1</sup>,</span>
+              <span class="author-block">Yu Qiao<sup style="color:#6fbf73;">1</sup>,</span>
+              <span class="author-block">Jifeng Dai<sup style="color:#ed4b82;">3</sup><sup>,</sup><sup
+                  style="color:#6fbf73;">1</sup>,</span>
+              <span class="author-block">Wenqi Shao<sup style="color:#6fbf73;">1</sup><sup>,</sup><sup>†</sup>,</span>
+              <span class="author-block">Wenhai Wang<sup style="color:#007bff;">4</sup><sup>,</sup><sup
+                  style="color:#6fbf73;">1</sup><sup>,</sup><sup>†</sup></span>
+            </div>
+
+            <br>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup style="color:#6fbf73;">1</sup>OpenGVLab, Shanghai AI Laboratory,</span>
+              <span class="author-block"><sup style="color:#ffac33;">2</sup>Fudan University,</span><br>
+              <span class="author-block"><sup style="color:#ed4b82;">3</sup>Tsinghua University,</span>
+              <span class="author-block"><sup style="color:#007bff;">4</sup>The Chinese University of Hong
+                Kong,</span><br>
+              <span class="author-block"><sup style="color:#9b51e0;">5</sup>Nanjing University,</span>
+              <span class="author-block"><sup style="color:#1b1be0;">6</sup>SenseTime Research,</span>
+              <span class="author-block"><sup style="color:#7befe5;">7</sup>The University of Hong Kong</span>
+            </div>
+
+            <br>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">*Equal contribution</span><br>
+              <span class="author-block">†Corresponding Author:</span>
+              <span class="author-block"><a href="mailto:wangwenhai@pjlab.org.cn">wangwenhai@pjlab.org.cn</a>,</span>
+              <span class="author-block"><a href="mailto:shaowenqi@pjlab.org.cn">shaowenqi@pjlab.org.cn</a></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2406.07230" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2406.07230" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/OpenGVLab/MM-NIAH"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Dataset Link. -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/OpenGVLab/MM-NIAH"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <!-- <i class="far fa-images"></i> -->
+                      <p style="font-size:18px">🤗</p>
+                      <!-- 🔗 -->
+                    </span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
+                <!-- Visualization Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://mm-niah.github.io/#visualization"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <p style="font-size:18px">🔮</p>
+                    </span>
+                    <span>Visualize</span>
+                  </a>
+                </span> -->
+                <!-- Leaderboard Link. -->
+                <span class="link-block">
+                  <a href="https://mm-niah.github.io/#leaderboard"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <p style="font-size:18px">🏆</p>
+                    </span>
+                    <span>Leaderboard</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="content has-text-centered">
+        <img src="https://github.com/OpenGVLab/MM-NIAH/blob/main/assets/data_examples.jpg?raw=true"
+          alt="geometric reasoning" width="75%" />
+        <p>
+          <b>Overview of the <img src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle"
+              alt="Logo" />
+            <span class="mm-niah">mm-niah</span> benchmark.</b>
+          Our benchmark consists of three tasks and two types of needles, formulating six
+          types of evaluation data in total. The Retrieval-Image-Needle and Reasoning-Image-Needle are formulated
+          as single-choice questions.
+        </p>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- 
+  <section class="section">
+    <div class="container" style="margin-top: -150px; margin-bottom: -100px;">
+      <div class="columns is-centered m-6">
+        <div class="column is-full has-text-centered content">
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/tease_scores_version4_gemini.png" alt="geometric reasoning" width="84%" />
+                <p> Accuracy scores of one leading LLM (i.e., PoT GPT-4), four primary LMMs, random chance, and human
+                  performance our proposed
+                  <img src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle" alt="Logo" />
+                  <span class="mm-niah">mm-niah</span>
+                  across mathematical reasoning and visual context types. PoT refers to program-of-thought prompting,
+                  and PoT GPT-4 is a textual LLM augmented with the caption and OCR text. GPT-4V is manually evaluated
+                  via the playground chatbot. <b class="best-score-text" style="color: #C6011F"> The scores of Gemini
+                    Ultra are from the Gemini Team, Google.</b>
+                </p>
+              </div>
+            </div>
+            <div class="box m-5">
+              <div class="content has-text-centered">
+                <img src="static/images/tease_scores_gpt4v.png" alt="geometric reasoning" width="84%" />
+                <p> Accuracy scores of one leading LLM (i.e., PoT GPT-4), four primary LMMs, random chance, and human
+                  performance our proposed
+                  <img src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle" alt="Logo" />
+                  <span class="mm-niah">mm-niah</span>
+                  across mathematical reasoning and visual context types. PoT refers to program-of-thought prompting,
+                  and PoT GPT-4 is a textual LLM augmented with the caption and OCR text. GPT-4V is manually evaluated
+                  via the playground chatbot.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section> -->
+
+
+  <section class="section">
+    <div class="container" style="margin-bottom: 2vh;">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Introduction</h2>
+          <div class="content has-text-justified">
+            <p>
+              Needle In A Multimodal Haystack (<img src="static/images/mm-niah.png"
+                style="width:1.0em;vertical-align: middle" alt="Logo" />
+              <span class="mm-niah">mm-niah</span>) is a comprehensive benchmark designed to systematically evaluate
+              the capability of existing MLLMs to comprehend long multimodal documents. This benchmark requires the
+              model
+              to answer specific questions according to the key information scattered throughout the multimodal
+              document.
+              The evaluation data in <img src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle"
+                alt="Logo" />
+              <span class="mm-niah">mm-niah</span> consists of three tasks: <b>retrieval</b>, <b>counting</b>, and
+              <b>reasoning</b>. The needles
+              are
+              inserted into either text or images in the documents. Those inserted into text are termed <b>text
+                needles</b>,
+              whereas those within images are referred to as <b>image needles</b>.
+              Evaluating the leading MLLMs on <img src="static/images/mm-niah.png"
+                style="width:1.0em;vertical-align: middle" alt="Logo" />
+              <span class="mm-niah">mm-niah</span>, we observe that existing models still have significant room for
+              improvement on these tasks, especially on vision-centric evaluation. We hope this work can provide a
+              platform for further research on long multimodal document comprehension and contribute to the advancement
+              of MLLMs.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    </div>
+  </section>
+
+  <!-- Leaderboard -->
+  <section class="section">
+    <div class="container">
+
+      <div class="columns is-centered">
+        <div class="column is-full has-text-centered content">
+          <!-- <h2 class="title is-3" id="leaderboard">Leaderboard on testmini</h2>
+          <div class="content">
+            <p class="mt-3">Accuracy scores on the <b>testmini</b> subset (1,000 examples) of <img
+                src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle" alt="Logo" />
+              <span class="mm-niah">mm-niah</span>.
+            </p>
+
+            <div id="testmini_leaderboard"></div>
+
+          </div> -->
+
+          <h2 class="title is-3" id="leaderboard_test">Leaderboard on test</h2>
+          <div class="content">
+            <p class="mt-3">Overall performance on the <b>test</b> subset (17,787 examples with <b>private</b> ground
+              truth) of <img src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle" alt="Logo" />
+              <span class="mm-niah">mm-niah</span>.
+            </p>
+
+            <!-- <table class="js-sort-table" id="results">
+              <tr>
+                <td class="js-sort-number"><strong>#</strong></td>
+                <td class="js-sort-number"><strong>Model</strong></td>
+                <td class="js-sort-number"><strong>Method</strong></td>
+                <td class="js-sort-number"><strong>Source</strong></td>
+                <td class="js-sort-number"><strong>Date</strong></td>
+                <td class="js-sort-number"><strong><u>ALL</u></strong></td>
+                <td class="js-sort-number"><strong>FQA</strong></td>
+                <td class="js-sort-number"><strong>GPS</strong></td>
+                <td class="js-sort-number"><strong>MWP</strong></td>
+                <td class="js-sort-number"><strong>TQA</strong></td>
+                <td class="js-sort-number"><strong>VQA</strong></td>
+                <td class="js-sort-number"><strong>ALG</strong></td>
+                <td class="js-sort-number"><strong>ARI</strong></td>
+                <td class="js-sort-number"><strong>GEO</strong></td>
+                <td class="js-sort-number"><strong>LOG</strong></td>
+                <td class="js-sort-number"><strong>NUM</strong></td>
+                <td class="js-sort-number"><strong>SCI</strong></td>
+                <td class="js-sort-number"><strong>STA</strong></td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td><b class="best-score-text">InternVL-Chat-V1.2-Plus 🥇</b></td>
+                <td>LMM 🖼️</td>
+                <td><a href="https://arxiv.org/abs/2312.14238" class="ext-link" style="font-size: 16px;">Link</a></td>
+                <td>2024-02-22</td>
+                <td><b class="best-score-text">60.18</b></td>
+                <td>52.2</td>
+                <td>56.2</td>
+                <td>78.3</td>
+                <td>61.6</td>
+                <td>55.5</td>
+                <td>56.0</td>
+                <td>64.4</td>
+                <td>57.6</td>
+                <td>21.6</td>
+                <td>46.1</td>
+                <td>60.0</td>
+                <td>60.1</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><b class="best-score-text">InternLM-XComposer2-VL-7B 🥈</b></td>
+                <td>LMM 🖼️</td>
+                <td><a href="https://github.com/InternLM/InternLM-XComposer" class="ext-link"
+                    style="font-size: 16px;">Link</a></td>
+                <td>2024-01-22</td>
+                <td><b class="best-score-text">57.93</b></td>
+                <td>53.9</td>
+                <td>56.4</td>
+                <td>77.1</td>
+                <td>58.4</td>
+                <td>43.2</td>
+                <td>54.8</td>
+                <td>57.6</td>
+                <td>58.0</td>
+                <td>16.5</td>
+                <td>47.6</td>
+                <td>59.1</td>
+                <td>62.5</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><b class="best-score-text">Qwen-VL-Plus 🥉</b></td>
+                <td>LMM 🖼️</td>
+                <td><a href="https://github.com/QwenLM/Qwen-VL" class="ext-link" style="font-size: 16px;">Link</a></td>
+                <td>2023-12-26</td>
+                <td><b class="best-score-text">44.33</b></td>
+                <td>55.9</td>
+                <td>34.7</td>
+                <td>29.7</td>
+                <td>58.8</td>
+                <td>42.4</td>
+                <td>40.7</td>
+                <td>35.4</td>
+                <td>36.6</td>
+                <td>21.6</td>
+                <td>30.4</td>
+                <td>55.9</td>
+                <td>56.3</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td><b class="">SPHINX-MoE</b></td>
+                <td>MoE 🤖</td>
+                <td><a href="https://github.com/Alpha-VLLM/LLaMA2-Accessory/tree/main/SPHINX" class="ext-link"
+                    style="font-size: 16px;">Link</a></td>
+                <td>2024-01-13</td>
+                <td><b class="">42.68</b></td>
+                <td>50.3</td>
+                <td>29.7</td>
+                <td>40.9</td>
+                <td>49.3</td>
+                <td>43.3</td>
+                <td>33.9</td>
+                <td>43.0</td>
+                <td>29.1</td>
+                <td>14.4</td>
+                <td>26.3</td>
+                <td>46.9</td>
+                <td>51.2</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td><b class="">MiniCPM-V-2 (2.8B)</b></td>
+                <td>LMM 🖼️</td>
+                <td><a href="https://github.com/OpenBMB/MiniCPM-V" class="ext-link" style="font-size: 16px;">Link</a>
+                </td>
+                <td>2024-04-14</td>
+                <td><b class="">39.89</b></td>
+                <td>51.7</td>
+                <td>27.4</td>
+                <td>39.8</td>
+                <td>42.5</td>
+                <td>34.7</td>
+                <td>31.3</td>
+                <td>34.4</td>
+                <td>30.7</td>
+                <td>13.4</td>
+                <td>33.5</td>
+                <td>38.5</td>
+                <td>50.0</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td><b class="">PoT GPT-4 (Caption+OCR)</b></td>
+                <td>Tool 🛠️</td>
+                <td><a href="https://arxiv.org/abs/2310.02255" class="ext-link" style="font-size: 16px;">Link</a></td>
+                <td>2023-10-03</td>
+                <td><b class="">31.74</b></td>
+                <td>27.6</td>
+                <td>37.4</td>
+                <td>23.9</td>
+                <td>43.0</td>
+                <td>30.3</td>
+                <td>37.1</td>
+                <td>27.9</td>
+                <td>37.5</td>
+                <td>22.7</td>
+                <td>15.8</td>
+                <td>44.5</td>
+                <td>31.9</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td><b>CoT GPT4 (Caption+OCR)</b></td>
+                <td>Tool 🛠️</td>
+                <td><a href="https://arxiv.org/abs/2310.02255" class="ext-link" style="font-size: 16px;">Link</a></td>
+                <td>2023-10-03</td>
+                <td><b>30.50</b></td>
+                <td>27.2</td>
+                <td>35.9</td>
+                <td>21.3</td>
+                <td>43.1</td>
+                <td>28.2</td>
+                <td>35.7</td>
+                <td>25.2</td>
+                <td>35.8</td>
+                <td>24.7</td>
+                <td>15.4</td>
+                <td>47.3</td>
+                <td>31.3</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td><b>LLaVA (LLaMA-2-13B)</b></td>
+                <td>LMM 🖼️</td>
+                <td><a href="https://arxiv.org/abs/2310.02255" class="ext-link" style="font-size: 16px;">Link</a></td>
+                <td>2023-10-03</td>
+                <td><b>25.40</b></td>
+                <td>22.9</td>
+                <td>24.6</td>
+                <td>18.1</td>
+                <td>35.8</td>
+                <td>29.7</td>
+                <td>26.9</td>
+                <td>22.5</td>
+                <td>24.4</td>
+                <td>19.1</td>
+                <td>19.1</td>
+                <td>34.7</td>
+                <td>21.6</td>
+              </tr>
+              <tr>
+                <td>*</td>
+                <td><b>Random Chance</b></td>
+                <td>-</td>
+                <td><a href="https://arxiv.org/abs/2310.02255" class="ext-link" style="font-size: 16px;">Link</a></td>
+                <td>2023-10-03</td>
+                <td><b>17.86</b></td>
+                <td>15.5</td>
+                <td>24.1</td>
+                <td>4.5</td>
+                <td>23.4</td>
+                <td>24.3</td>
+                <td>25.8</td>
+                <td>13.8</td>
+                <td>22.7</td>
+                <td>13.4</td>
+                <td>8.8</td>
+                <td>15.8</td>
+                <td>14.3</td>
+              </tr>
+            </table> -->
+
+            <table class="js-sort-table" id="results">
+              <tr>
+                <td class="js-sort-number"><strong>#</strong></td>
+                <td class="js-sort-number"><strong>Model</strong></td>
+                <td class="js-sort-number"><strong>1K</strong></td>
+                <td class="js-sort-number"><strong>2K</strong></td>
+                <td class="js-sort-number"><strong>4K</strong></td>
+                <td class="js-sort-number"><strong>8K</strong></td>
+                <td class="js-sort-number"><strong>12K</strong></td>
+                <td class="js-sort-number"><strong>16K</strong></td>
+                <td class="js-sort-number"><strong>24K</strong></td>
+                <td class="js-sort-number"><strong>32K</strong></td>
+                <td class="js-sort-number"><strong>40K</strong></td>
+                <td class="js-sort-number"><strong>48K</strong></td>
+                <td class="js-sort-number"><strong>64K</strong></td>
+                <td class="js-sort-number"><strong>Overall</strong></td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Human</td>
+                <td>99.7%</td>
+                <td>99.1%</td>
+                <td>97.9%</td>
+                <td>99.0%</td>
+                <td>98.5%</td>
+                <td>98.8%</td>
+                <td>99.9%</td>
+                <td>99.4%</td>
+                <td>99.2%</td>
+                <td>98.6%</td>
+                <td>98.5%</td>
+                <td>98.9%</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Gemini-1.5</td>
+                <td>64.7%</td>
+                <td>58.3%</td>
+                <td>56.8%</td>
+                <td>57.1%</td>
+                <td>55.4%</td>
+                <td>53.7%</td>
+                <td>53.6%</td>
+                <td>51.9%</td>
+                <td>52.5%</td>
+                <td>50.7%</td>
+                <td>53.6%</td>
+                <td>55.3%</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>InternVL-1.5-RAG</td>
+                <td>67.5%</td>
+                <td>61.1%</td>
+                <td>53.3%</td>
+                <td>51.2%</td>
+                <td>50.6%</td>
+                <td>51.5%</td>
+                <td>46.2%</td>
+                <td>46.2%</td>
+                <td>43.8%</td>
+                <td>40.1%</td>
+                <td>39.0%</td>
+                <td>50.1%</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>InternVL-1.5</td>
+                <td>59.5%</td>
+                <td>55.3%</td>
+                <td>50.1%</td>
+                <td>46.4%</td>
+                <td>45.2%</td>
+                <td>41.9%</td>
+                <td>39.5%</td>
+                <td>33.2%</td>
+                <td>31.6%</td>
+                <td>33.2%</td>
+                <td>30.1%</td>
+                <td>42.4%</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>LLaVA-1.6-34B</td>
+                <td>57.9%</td>
+                <td>53.5%</td>
+                <td>47.1%</td>
+                <td>38.6%</td>
+                <td>27.0%</td>
+                <td>8.2%</td>
+                <td>0.0%</td>
+                <td>0.0%</td>
+                <td>0.0%</td>
+                <td>0.0%</td>
+                <td>0.0%</td>
+                <td>21.1%</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>LLaVA-1.6-13B</td>
+                <td>47.0%</td>
+                <td>45.0%</td>
+                <td>41.6%</td>
+                <td>35.0%</td>
+                <td>24.3%</td>
+                <td>15.5%</td>
+                <td>5.7%</td>
+                <td>0.8%</td>
+                <td>0.2%</td>
+                <td>0.1%</td>
+                <td>0.0%</td>
+                <td>19.6%</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>VILA-13B</td>
+                <td>44.7%</td>
+                <td>39.3%</td>
+                <td>34.9%</td>
+                <td>28.3%</td>
+                <td>22.0%</td>
+                <td>8.9%</td>
+                <td>1.1%</td>
+                <td>0.2%</td>
+                <td>0.1%</td>
+                <td>0.0%</td>
+                <td>0.1%</td>
+                <td>16.3%</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>IDEFICS2</td>
+                <td>48.0%</td>
+                <td>33.8%</td>
+                <td>16.4%</td>
+                <td>13.8%</td>
+                <td>14.3%</td>
+                <td>1.2%</td>
+                <td>0.0%</td>
+                <td>0.0%</td>
+                <td>0.0%</td>
+                <td>0.0%</td>
+                <td>0.0%</td>
+                <td>11.6%</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Emu2-Chat</td>
+                <td>33.0%</td>
+                <td>27.8%</td>
+                <td>17.2%</td>
+                <td>5.9%</td>
+                <td>0.9%</td>
+                <td>0.0%</td>
+                <td>0.0%</td>
+                <td>0.0%</td>
+                <td>0.0%</td>
+                <td>0.0%</td>
+                <td>0.0%</td>
+                <td>7.7%</td>
+              </tr>
+            </table>
+
+            <div>
+              <p>🚨 To submit your results to the leaderboard, please send to <a
+                  href="mailto:wangweiyun@pjlab.org.cn">this
+                  email</a> with your result json files.</p>
+              <p>🚨 For more submission details, please refer to <a
+                  href="https://github.com/OpenGVLab/MM-NIAH/tree/main?tab=readme-ov-file#leaderboard">this link</a>.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DATASET SECTION -->
+  <section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+      <h1 class="title is-1 mm-niah">
+        <img src="static/images/mm-niah.png" style="width:1em;vertical-align: middle" alt="Logo" />
+        <span class="mm-niah" style="vertical-align: middle">mm-niah</span>
+      </h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <!-- Overview -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Overview</h2>
+          <div class="content has-text-justified">
+            <p>
+              We introduce Needle In A Multimodal Haystack (<img src="static/images/mm-niah.png"
+                style="width:1.0em;vertical-align: middle" alt="Logo" /> <span class="mm-niah">mm-niah</span>), a
+              benchmark designed to systematically evaluate the comprehension ability for long multimodal documents.
+              This benchmark requires the model to answer specific questions according to the key information scattered
+              throughout the multimodal document.
+              To generate the evaluation data, we first concatenate interleaved image-text sequences from
+              OBELICS to establish the background documents, termed <b>multimodal haystacks</b>. Then, we generate three
+              data types based on these documents: <b>retrieval</b>, <b>counting</b>, and <b>reasoning</b>.
+              We insert either <b>text needles</b> or <b>image needles</b> into documents for each task.
+              Those inserted into text are termed <b>text needles</b>, whereas those within images are referred to as
+              <b>image needles</b>.
+            <ul>
+              <li><b>Retrieval</b>: The text needle in the retrieval task is a random fact or statement inserted into a
+                certain document depth. The corresponding question asks the model to retrieve this statement.
+                The image needle is a random cartoon-style image generated by DALLE-3, which is inserted into a certain
+                image within the document, and the corresponding question is formulated as a single-choice question. The
+                model is asked to select the image that appears in the document among four image options.</li>
+              <li><b>Counting</b>: The text needle in the counting task comprises a series of statements, each of which
+                claims the little penguin counted a certain number of needles. For the image needles, a certain number
+                of cartoon-style images are inserted into each image within the document, serving as the needles to be
+                counted.
+                Inspired by the Counting Stars benchmark~\cite{song2024counting_stars}, we require the model to list the
+                number of needles in each statement or image instead of directly outputting the total number of needles.
+                The motivation behind this design is to ensure that the model accurately retrieves and comprehends all
+                text and image needles inserted into the multimodal document.</li>
+              <li><b>Reasoning</b>: A series of statements are inserted into different positions of the given document
+                to serve as the text needle. The model must retrieve all these statements and reason over them to answer
+                the question correctly.
+                Besides, for each evaluation data, images sampled from the Jigsaw and Multi-view reasoning split of
+                BLINK benchmark are inserted into the document to serve as the image needle. The model is required to
+                answer the question related to these images.</li>
+            </ul>
+            </p>
+
+            <p>
+              All the data examples were divided into two subsets: validation and test.
+            <ul>
+              <li><b>validation</b>: 1,000 examples used for model development, validation, or for those with limited
+                computing resources.</li>
+              <li><b>test</b>: 17,787 examples for standard evaluation. Notably,
+                the answer labels for test will NOT be publicly released.</li>
+            </ul>
+            You can download the dataset on <a href="https://huggingface.co/datasets/OpenGVLab/MM-NIAH"
+              target="_blank">Hugging Face Dataset</a>.
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Comparisons with Existing Benchmarks</h2>
+          <div class="content has-text-justified">
+            <p>
+              Existing benchmarks for multi-image comprehensions, such as SEED-Bench-2 and BLINK, consist of short
+              contexts, which fail to evaluate the capability for long-context document comprehension.
+              Additionally, benchmarks for video question answering, like MVBench, concentrate on
+              vision-dominant video understanding rather than text-dominant multimodal document understanding.
+            </p>
+            <div class="content has-text-centered">
+              <img src="https://github.com/OpenGVLab/MM-NIAH/blob/main/assets/teaser.jpg?raw=true" alt="comparison"
+                class="center">
+              <p>
+                <b>Comparison of <img src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle"
+                    alt="Logo" /><span class="mm-niah">mm-niah</span> with other multi-image benchmarks.</b>
+                Our benchmark focuses on the evaluation of long multimodal document comprehension.
+              </p>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics -->
+      <div class="columns is-centered m-6">
+        <div class="column is-full has-text-centered content">
+          <h2 class="title is-3">Statistics</h2>
+          <p>Notable statistics of <img src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle"
+              alt="Logo" />
+            <span class="mm-niah">mm-niah</span>
+          </p>
+
+          <div class="content">
+            <table class="tg" id="results">
+              <thead>
+                <tr>
+                  <th class="tg-wa1i"><strong>Task<strong></th>
+                  <th class="tg-wa1i"><strong>Needle Type<strong></th>
+                  <th class="tg-wa1i"><strong>Answer Type<strong></th>
+                  <th class="tg-wa1i"><strong>#Samples (val)<strong></th>
+                  <th class="tg-wa1i"><strong>#Samples (test)<strong></th>
+                  <th class="tg-wa1i"><strong>#Needles Per Sample<strong></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="tg-nrix" rowspan="2"><strong>Retrieval<strong></td>
+                  <td class="tg-nrix"><strong>Text<strong></td>
+                  <td class="tg-nrix"><strong>Open-Ended<strong></td>
+                  <td class="tg-nrix"><strong>2935<strong></td>
+                  <td class="tg-nrix"><strong>3072<strong></td>
+                  <td class="tg-nrix"><strong>1<strong></td>
+                </tr>
+                <tr>
+                  <td class="tg-nrix"><strong>Image<strong></td>
+                  <td class="tg-nrix"><strong>Multi-Choice<strong></td>
+                  <td class="tg-nrix"><strong>2890<strong></td>
+                  <td class="tg-nrix"><strong>3005<strong></td>
+                  <td class="tg-nrix"><strong>1<strong></td>
+                </tr>
+                <tr>
+                  <td class="tg-nrix" rowspan="2"><strong>Counting<strong></td>
+                  <td class="tg-nrix"><strong>Text<strong></td>
+                  <td class="tg-nrix"><strong>Open-Ended<strong></td>
+                  <td class="tg-nrix"><strong>2938<strong></td>
+                  <td class="tg-nrix"><strong>3060<strong></td>
+                  <td class="tg-nrix"><strong>1~3<strong></td>
+                </tr>
+                <tr>
+                  <td class="tg-nrix"><strong>Image<strong></td>
+                  <td class="tg-nrix"><strong>Open-Ended<strong></td>
+                  <td class="tg-nrix"><strong>2584<strong></td>
+                  <td class="tg-nrix"><strong>2713<strong></td>
+                  <td class="tg-nrix"><strong>1~5<strong></td>
+                </tr>
+                <tr>
+                  <td class="tg-nrix" rowspan="2"><strong>Reasoning<strong></td>
+                  <td class="tg-nrix"><strong>Text<strong></td>
+                  <td class="tg-nrix"><strong>Open-Ended<strong></td>
+                  <td class="tg-nrix"><strong>2888<strong></td>
+                  <td class="tg-nrix"><strong>3004<strong></td>
+                  <td class="tg-nrix"><strong>3<strong></td>
+                </tr>
+                <tr>
+                  <td class="tg-nrix"><strong>Image<strong></td>
+                  <td class="tg-nrix"><strong>Multi-Choice<strong></td>
+                  <td class="tg-nrix"><strong>2802<strong></td>
+                  <td class="tg-nrix"><strong>2933<strong></td>
+                  <td class="tg-nrix"><strong>1~2<strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS SECTION -->
+  <section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+      <h1 class="title is-1 mm-niah-bak">Experiment Results</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <!-------------------------------------------------------------------- Results -------------------------------------------------------------------->
+      <div class="columns is-centered m-6">
+        <div class="column is-full has-text-centered content">
+          <h2 class="title is-3">Results on each tasks</h2>
+          <div class="content has-text-justified">
+            <p>
+              We present the evaluation results in both heatmap format and table format.
+              In the heatmaps, green slots indicate higher performance, while red slots indicate lower performance.
+              In the tables, we provide the average performance across depths for each context length range.
+            </p>
+          </div>
+          <!-- <div class="content has-text-centered">
+            <img src="https://github.com/OpenGVLab/MM-NIAH/blob/main/assets/main_table.jpg?raw=true"
+              alt="overall performance" width="75%">
+            <p>
+              <b>Overall performance on <img src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle"
+                  alt="Logo" />
+                <span class="mm-niah">mm-niah</span> for each context length.</b>
+              These results are obtained by averaging the performance across the six tasks in <img
+                src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle" alt="Logo" />
+              <span class="mm-niah">mm-niah</span>.
+            </p>
+          </div> -->
+          <div class="content has-text-centered">
+            <img src="https://github.com/OpenGVLab/MM-NIAH/blob/main/assets/main_heatmap.jpg?raw=true" alt="heatmaps"
+              width="75%">
+            <p>
+              <b>Results on <img src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle"
+                  alt="Logo" />
+                <span class="mm-niah">mm-niah</span>.</b>
+              Green slots indicate higher performance, while red slots indicate lower performance.
+              We evaluate GPT-4V only on our text-needle data because of the constraint that the API of GPT-4V only
+              supports up to 10 images.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-3 has-text-centered">BibTeX</h2>
+      <pre><code>
+@article{wang2024needle,
+  title={Needle In A Multimodal Haystack}, 
+  author={Wang, Weiyun and Zhang, Shuibo and Ren, Yiming and Duan, Yuchen and Li, Tiantong and Liu, Shuo and Hu, Mengkang and Chen, Zhe and Zhang, Kaipeng and Lu, Lewei and Zhu, Xizhou and Luo, Ping and Qiao, Yu and Dai, Jifeng and Shao, Wenqi and Wang, Wenhai},
+  journal={arXiv preprint arXiv:2406.07230},
+  year={2024}
+}
+      </code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <!-- <div class="container"> -->
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is website adapted from <a href="https://nerfies.github.io/">Nerfies</a> and <a
+              href="https://github.com/lupantech/MathVista/">MathVista</a>, licensed under a <a rel="license"
+              href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+  </footer>
+
+</body>
+
+</html>
