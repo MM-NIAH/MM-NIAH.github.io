@@ -292,14 +292,14 @@
 
       <div class="columns is-centered">
         <div class="column is-full has-text-centered content">
-          <!-- <h2 class="title is-3" id="leaderboard">Leaderboard on testmini</h2>
+          <!-- <h2 class="title is-3" id="leaderboard">Leaderboard on validation</h2>
           <div class="content">
-            <p class="mt-3">Accuracy scores on the <b>testmini</b> subset (1,000 examples) of <img
+            <p class="mt-3">Overall performance on the <b>validation</b> subset (3,114 examples) of <img
                 src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle" alt="Logo" />
               <span class="mm-niah">mm-niah</span>.
             </p>
 
-            <div id="testmini_leaderboard"></div>
+            <div id="validation_leaderboard"></div>
 
           </div> -->
 
@@ -309,217 +309,16 @@
               truth) of <img src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle" alt="Logo" />
               <span class="mm-niah">mm-niah</span>.
             </p>
-
-            <!-- <table class="js-sort-table" id="results">
-              <tr>
-                <td class="js-sort-number"><strong>#</strong></td>
-                <td class="js-sort-number"><strong>Model</strong></td>
-                <td class="js-sort-number"><strong>Method</strong></td>
-                <td class="js-sort-number"><strong>Source</strong></td>
-                <td class="js-sort-number"><strong>Date</strong></td>
-                <td class="js-sort-number"><strong><u>ALL</u></strong></td>
-                <td class="js-sort-number"><strong>FQA</strong></td>
-                <td class="js-sort-number"><strong>GPS</strong></td>
-                <td class="js-sort-number"><strong>MWP</strong></td>
-                <td class="js-sort-number"><strong>TQA</strong></td>
-                <td class="js-sort-number"><strong>VQA</strong></td>
-                <td class="js-sort-number"><strong>ALG</strong></td>
-                <td class="js-sort-number"><strong>ARI</strong></td>
-                <td class="js-sort-number"><strong>GEO</strong></td>
-                <td class="js-sort-number"><strong>LOG</strong></td>
-                <td class="js-sort-number"><strong>NUM</strong></td>
-                <td class="js-sort-number"><strong>SCI</strong></td>
-                <td class="js-sort-number"><strong>STA</strong></td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td><b class="best-score-text">InternVL-Chat-V1.2-Plus 🥇</b></td>
-                <td>LMM 🖼️</td>
-                <td><a href="https://arxiv.org/abs/2312.14238" class="ext-link" style="font-size: 16px;">Link</a></td>
-                <td>2024-02-22</td>
-                <td><b class="best-score-text">60.18</b></td>
-                <td>52.2</td>
-                <td>56.2</td>
-                <td>78.3</td>
-                <td>61.6</td>
-                <td>55.5</td>
-                <td>56.0</td>
-                <td>64.4</td>
-                <td>57.6</td>
-                <td>21.6</td>
-                <td>46.1</td>
-                <td>60.0</td>
-                <td>60.1</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td><b class="best-score-text">InternLM-XComposer2-VL-7B 🥈</b></td>
-                <td>LMM 🖼️</td>
-                <td><a href="https://github.com/InternLM/InternLM-XComposer" class="ext-link"
-                    style="font-size: 16px;">Link</a></td>
-                <td>2024-01-22</td>
-                <td><b class="best-score-text">57.93</b></td>
-                <td>53.9</td>
-                <td>56.4</td>
-                <td>77.1</td>
-                <td>58.4</td>
-                <td>43.2</td>
-                <td>54.8</td>
-                <td>57.6</td>
-                <td>58.0</td>
-                <td>16.5</td>
-                <td>47.6</td>
-                <td>59.1</td>
-                <td>62.5</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td><b class="best-score-text">Qwen-VL-Plus 🥉</b></td>
-                <td>LMM 🖼️</td>
-                <td><a href="https://github.com/QwenLM/Qwen-VL" class="ext-link" style="font-size: 16px;">Link</a></td>
-                <td>2023-12-26</td>
-                <td><b class="best-score-text">44.33</b></td>
-                <td>55.9</td>
-                <td>34.7</td>
-                <td>29.7</td>
-                <td>58.8</td>
-                <td>42.4</td>
-                <td>40.7</td>
-                <td>35.4</td>
-                <td>36.6</td>
-                <td>21.6</td>
-                <td>30.4</td>
-                <td>55.9</td>
-                <td>56.3</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td><b class="">SPHINX-MoE</b></td>
-                <td>MoE 🤖</td>
-                <td><a href="https://github.com/Alpha-VLLM/LLaMA2-Accessory/tree/main/SPHINX" class="ext-link"
-                    style="font-size: 16px;">Link</a></td>
-                <td>2024-01-13</td>
-                <td><b class="">42.68</b></td>
-                <td>50.3</td>
-                <td>29.7</td>
-                <td>40.9</td>
-                <td>49.3</td>
-                <td>43.3</td>
-                <td>33.9</td>
-                <td>43.0</td>
-                <td>29.1</td>
-                <td>14.4</td>
-                <td>26.3</td>
-                <td>46.9</td>
-                <td>51.2</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td><b class="">MiniCPM-V-2 (2.8B)</b></td>
-                <td>LMM 🖼️</td>
-                <td><a href="https://github.com/OpenBMB/MiniCPM-V" class="ext-link" style="font-size: 16px;">Link</a>
-                </td>
-                <td>2024-04-14</td>
-                <td><b class="">39.89</b></td>
-                <td>51.7</td>
-                <td>27.4</td>
-                <td>39.8</td>
-                <td>42.5</td>
-                <td>34.7</td>
-                <td>31.3</td>
-                <td>34.4</td>
-                <td>30.7</td>
-                <td>13.4</td>
-                <td>33.5</td>
-                <td>38.5</td>
-                <td>50.0</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td><b class="">PoT GPT-4 (Caption+OCR)</b></td>
-                <td>Tool 🛠️</td>
-                <td><a href="https://arxiv.org/abs/2310.02255" class="ext-link" style="font-size: 16px;">Link</a></td>
-                <td>2023-10-03</td>
-                <td><b class="">31.74</b></td>
-                <td>27.6</td>
-                <td>37.4</td>
-                <td>23.9</td>
-                <td>43.0</td>
-                <td>30.3</td>
-                <td>37.1</td>
-                <td>27.9</td>
-                <td>37.5</td>
-                <td>22.7</td>
-                <td>15.8</td>
-                <td>44.5</td>
-                <td>31.9</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td><b>CoT GPT4 (Caption+OCR)</b></td>
-                <td>Tool 🛠️</td>
-                <td><a href="https://arxiv.org/abs/2310.02255" class="ext-link" style="font-size: 16px;">Link</a></td>
-                <td>2023-10-03</td>
-                <td><b>30.50</b></td>
-                <td>27.2</td>
-                <td>35.9</td>
-                <td>21.3</td>
-                <td>43.1</td>
-                <td>28.2</td>
-                <td>35.7</td>
-                <td>25.2</td>
-                <td>35.8</td>
-                <td>24.7</td>
-                <td>15.4</td>
-                <td>47.3</td>
-                <td>31.3</td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td><b>LLaVA (LLaMA-2-13B)</b></td>
-                <td>LMM 🖼️</td>
-                <td><a href="https://arxiv.org/abs/2310.02255" class="ext-link" style="font-size: 16px;">Link</a></td>
-                <td>2023-10-03</td>
-                <td><b>25.40</b></td>
-                <td>22.9</td>
-                <td>24.6</td>
-                <td>18.1</td>
-                <td>35.8</td>
-                <td>29.7</td>
-                <td>26.9</td>
-                <td>22.5</td>
-                <td>24.4</td>
-                <td>19.1</td>
-                <td>19.1</td>
-                <td>34.7</td>
-                <td>21.6</td>
-              </tr>
-              <tr>
-                <td>*</td>
-                <td><b>Random Chance</b></td>
-                <td>-</td>
-                <td><a href="https://arxiv.org/abs/2310.02255" class="ext-link" style="font-size: 16px;">Link</a></td>
-                <td>2023-10-03</td>
-                <td><b>17.86</b></td>
-                <td>15.5</td>
-                <td>24.1</td>
-                <td>4.5</td>
-                <td>23.4</td>
-                <td>24.3</td>
-                <td>25.8</td>
-                <td>13.8</td>
-                <td>22.7</td>
-                <td>13.4</td>
-                <td>8.8</td>
-                <td>15.8</td>
-                <td>14.3</td>
-              </tr>
-            </table> -->
+            <p class="mt-3">
+              The overall performance is obtained by averaging the performance across all context ranges.
+            </p>
 
             <table class="js-sort-table" id="results">
               <tr>
                 <td class="js-sort-number"><strong>#</strong></td>
                 <td class="js-sort-number"><strong>Model</strong></td>
+                <td class="js-sort-number"><strong>Source</strong></td>
+                <td class="js-sort-number"><strong>Date</strong></td>
                 <td class="js-sort-number"><strong>1K</strong></td>
                 <td class="js-sort-number"><strong>2K</strong></td>
                 <td class="js-sort-number"><strong>4K</strong></td>
@@ -531,11 +330,14 @@
                 <td class="js-sort-number"><strong>40K</strong></td>
                 <td class="js-sort-number"><strong>48K</strong></td>
                 <td class="js-sort-number"><strong>64K</strong></td>
-                <td class="js-sort-number"><strong>Overall</strong></td>
+                <td class="js-sort-number"><strong><u>Overall</u></strong></td>
               </tr>
               <tr>
-                <td>1</td>
+                <td>-</td>
                 <td>Human</td>
+                <td><a href="https://mm-niah.github.io/" class="ext-link" style="font-size: 16px;">Link</a>
+                </td>
+                <td>2024-06-13</td>
                 <td>99.7%</td>
                 <td>99.1%</td>
                 <td>97.9%</td>
@@ -550,8 +352,10 @@
                 <td>98.9%</td>
               </tr>
               <tr>
-                <td>2</td>
-                <td>Gemini-1.5</td>
+                <td>1</td>
+                <td><b class="best-score-text">Gemini-1.5 🥇</b></td>
+                <td><a href="https://arxiv.org/abs/2403.05530" class="ext-link" style="font-size: 16px;">Link</a></td>
+                <td>2024-06-13</td>
                 <td>64.7%</td>
                 <td>58.3%</td>
                 <td>56.8%</td>
@@ -566,8 +370,11 @@
                 <td>55.3%</td>
               </tr>
               <tr>
-                <td>3</td>
-                <td>InternVL-1.5-RAG</td>
+                <td>2</td>
+                <td><b class="best-score-text">InternVL-1.5-RAG 🥈</b></td>
+                <td><a href="https://mm-niah.github.io/" class="ext-link" style="font-size: 16px;">Link</a>
+                </td>
+                <td>2024-06-13</td>
                 <td>67.5%</td>
                 <td>61.1%</td>
                 <td>53.3%</td>
@@ -582,8 +389,11 @@
                 <td>50.1%</td>
               </tr>
               <tr>
-                <td>4</td>
-                <td>InternVL-1.5</td>
+                <td>3</td>
+                <td><b class="best-score-text">InternVL-1.5 🥉</b></td>
+                <td><a href="https://github.com/OpenGVLab/InternVL" class="ext-link" style="font-size: 16px;">Link</a>
+                </td>
+                <td>2024-06-13</td>
                 <td>59.5%</td>
                 <td>55.3%</td>
                 <td>50.1%</td>
@@ -598,8 +408,10 @@
                 <td>42.4%</td>
               </tr>
               <tr>
-                <td>5</td>
+                <td>4</td>
                 <td>LLaVA-1.6-34B</td>
+                <td><a href="https://llava-vl.github.io/" class="ext-link" style="font-size: 16px;">Link</a></td>
+                <td>2024-06-13</td>
                 <td>57.9%</td>
                 <td>53.5%</td>
                 <td>47.1%</td>
@@ -614,8 +426,10 @@
                 <td>21.1%</td>
               </tr>
               <tr>
-                <td>6</td>
+                <td>5</td>
                 <td>LLaVA-1.6-13B</td>
+                <td><a href="https://llava-vl.github.io/" class="ext-link" style="font-size: 16px;">Link</a></td>
+                <td>2024-06-13</td>
                 <td>47.0%</td>
                 <td>45.0%</td>
                 <td>41.6%</td>
@@ -630,8 +444,11 @@
                 <td>19.6%</td>
               </tr>
               <tr>
-                <td>7</td>
+                <td>6</td>
                 <td>VILA-13B</td>
+                <td><a href="https://github.com/Efficient-Large-Model/VILA" class="ext-link"
+                    style="font-size: 16px;">Link</a></td>
+                <td>2024-06-13</td>
                 <td>44.7%</td>
                 <td>39.3%</td>
                 <td>34.9%</td>
@@ -646,8 +463,11 @@
                 <td>16.3%</td>
               </tr>
               <tr>
-                <td>8</td>
+                <td>7</td>
                 <td>IDEFICS2</td>
+                <td><a href="https://huggingface.co/HuggingFaceM4/idefics2-8b" class="ext-link"
+                    style="font-size: 16px;">Link</a></td>
+                <td>2024-06-13</td>
                 <td>48.0%</td>
                 <td>33.8%</td>
                 <td>16.4%</td>
@@ -662,8 +482,10 @@
                 <td>11.6%</td>
               </tr>
               <tr>
-                <td>9</td>
+                <td>8</td>
                 <td>Emu2-Chat</td>
+                <td><a href="https://baaivision.github.io/emu2/" class="ext-link" style="font-size: 16px;">Link</a></td>
+                <td>2024-06-13</td>
                 <td>33.0%</td>
                 <td>27.8%</td>
                 <td>17.2%</td>
