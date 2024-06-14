@@ -695,6 +695,54 @@
 
   <section class="section">
     <div class="container">
+      <!-------------------------------------------------------------------- Findings -------------------------------------------------------------------->
+      <div class="columns is-centered m-6">
+        <div class="column is-four-fifths has-text-centered content">
+          <h2 class="title is-3">Main Findings</h2>
+          <div class="content has-text-justified">
+            <p>
+              Based on <img src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle"
+                alt="Logo" /><span class="mm-niah">mm-niah</span>, we conducted a series of experiments. The main
+              findings are summarized as follows:
+            </p>
+            <ul style="font-size: 1.25em;">
+              <!-- <ul> -->
+              <li style="margin-bottom: 0.625em;">The most advanced MLLMs (e.g. Gemini-1.5) still struggle to comprehend
+                multimodal documents.</li>
+
+              <!-- <li style="margin-bottom: 0.625em;">Image needles are much more difficult than text needles.</li> -->
+              <li style="margin-bottom: 0.625em;"><strong>All MLLMs exhibit poor performance on image needles.</strong>
+              </li>
+
+              <li style="margin-bottom: 0.625em;">MLLMs fail to recognize the exact number of images in the document.
+              </li>
+
+              <li style="margin-bottom: 0.625em;">Models pre-trained on image-text interleaved data do not exhibit
+                superior
+                performance.</li>
+
+              <li style="margin-bottom: 0.625em;">Training on background documents does not boost performance on
+                MM-NIAH.
+              </li>
+
+              <li style="margin-bottom: 0.625em;">The "Lost in the Middle" problem also exists in MLLMs.</li>
+
+              <li style="margin-bottom: 0.625em;">Long context capability of LLMs is NOT retained in MLLMs.</li>
+
+              <li style="margin-bottom: 0.625em;">RAG boosts Text Needle Retrieval but not Image Needle Retrieval.</li>
+
+              <li style="margin-bottom: 0.625em;">Placing questions before context does NOT improve model performance.
+              </li>
+
+              <li style="margin-bottom: 0.625em;">Humans achieve near-perfect performance on MM-NIAH.</li>
+            </ul>
+            <p>
+              Please see <a href="https://arxiv.org/pdf/2406.07230" target="_blank">our paper</a> for more detailed
+              analyses.
+            </p>
+          </div>
+        </div>
+      </div>
 
       <!-------------------------------------------------------------------- Results -------------------------------------------------------------------->
       <div class="columns is-centered m-6">
