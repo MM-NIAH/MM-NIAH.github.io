@@ -46,11 +46,15 @@
   <script src="./static/js/explorer-index.js"></script>
   <script src="./static/js/question_card.js"></script>
 
-  <script src="./static/js/leaderboard_testmini.js"></script>
-  <script src="./data/results/output_folders.js" defer></script>
-  <script src="./data/results/model_scores.js" defer></script>
-
-  <script src="./visualizer/data/data_public.js" defer></script>
+  <script src="./static/js/leaderboard.js"></script>
+  <script src="./data/retrieval_text_test_leaderboard.js" defer></script>
+  <script src="./data/retrieval_image_test_leaderboard.js" defer></script>
+  <script src="./data/counting_text_test_leaderboard.js" defer></script>
+  <script src="./data/counting_image_test_leaderboard.js" defer></script>
+  <script src="./data/reasoning_text_test_leaderboard.js" defer></script>
+  <script src="./data/reasoning_image_test_leaderboard.js" defer></script>
+  <script src="./data/overall_test_leaderboard.js" defer></script>
+  <script src="./data/overall_val_leaderboard.js" defer></script>
 
 </head>
 
@@ -298,18 +302,17 @@
 
       <div class="columns is-centered">
         <div class="column is-full has-text-centered content">
-          <!-- <h2 class="title is-3" id="leaderboard">Leaderboard on validation</h2>
+          <h2 class="title is-3" id="leaderboard">Leaderboard on Validation</h2>
           <div class="content">
             <p class="mt-3">Overall performance on the <b>validation</b> subset (3,114 examples) of <img
                 src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle" alt="Logo" />
               <span class="mm-niah">mm-niah</span>.
             </p>
+            <div id="overall_val_leaderboard"></div>
 
-            <div id="validation_leaderboard"></div>
+          </div>
 
-          </div> -->
-
-          <h2 class="title is-3" id="leaderboard_test">Leaderboard on test</h2>
+          <h2 class="title is-3" id="leaderboard_test">Leaderboard on Test</h2>
           <div class="content">
             <p class="mt-3">Overall performance on the <b>test</b> subset (17,787 examples with <b>private</b> ground
               truth) of <img src="static/images/mm-niah.png" style="width:1.0em;vertical-align: middle" alt="Logo" />
@@ -318,194 +321,7 @@
             <p class="mt-3">
               The overall performance is obtained by averaging the performance across all context ranges.
             </p>
-
-            <table class="js-sort-table" id="results">
-              <tr>
-                <td class="js-sort-number"><strong>#</strong></td>
-                <td class="js-sort-number"><strong>Model</strong></td>
-                <td class="js-sort-number"><strong>Source</strong></td>
-                <td class="js-sort-number"><strong>Date</strong></td>
-                <td class="js-sort-number"><strong>1K</strong></td>
-                <td class="js-sort-number"><strong>2K</strong></td>
-                <td class="js-sort-number"><strong>4K</strong></td>
-                <td class="js-sort-number"><strong>8K</strong></td>
-                <td class="js-sort-number"><strong>12K</strong></td>
-                <td class="js-sort-number"><strong>16K</strong></td>
-                <td class="js-sort-number"><strong>24K</strong></td>
-                <td class="js-sort-number"><strong>32K</strong></td>
-                <td class="js-sort-number"><strong>40K</strong></td>
-                <td class="js-sort-number"><strong>48K</strong></td>
-                <td class="js-sort-number"><strong>64K</strong></td>
-                <td class="js-sort-number"><strong><u>Overall</u></strong></td>
-              </tr>
-              <tr>
-                <td>-</td>
-                <td>Human</td>
-                <td><a href="https://mm-niah.github.io/" class="ext-link" style="font-size: 16px;">Link</a>
-                </td>
-                <td>2024-06-13</td>
-                <td>99.7%</td>
-                <td>99.1%</td>
-                <td>97.9%</td>
-                <td>99.0%</td>
-                <td>98.5%</td>
-                <td>98.8%</td>
-                <td>99.9%</td>
-                <td>99.4%</td>
-                <td>99.2%</td>
-                <td>98.6%</td>
-                <td>98.5%</td>
-                <td>98.9%</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td><b class="best-score-text">Gemini-1.5 🥇</b></td>
-                <td><a href="https://arxiv.org/abs/2403.05530" class="ext-link" style="font-size: 16px;">Link</a></td>
-                <td>2024-06-13</td>
-                <td>64.7%</td>
-                <td>58.3%</td>
-                <td>56.8%</td>
-                <td>57.1%</td>
-                <td>55.4%</td>
-                <td>53.7%</td>
-                <td>53.6%</td>
-                <td>51.9%</td>
-                <td>52.5%</td>
-                <td>50.7%</td>
-                <td>53.6%</td>
-                <td>55.3%</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td><b class="best-score-text">InternVL-1.5-RAG 🥈</b></td>
-                <td><a href="https://mm-niah.github.io/" class="ext-link" style="font-size: 16px;">Link</a>
-                </td>
-                <td>2024-06-13</td>
-                <td>67.5%</td>
-                <td>61.1%</td>
-                <td>53.3%</td>
-                <td>51.2%</td>
-                <td>50.6%</td>
-                <td>51.5%</td>
-                <td>46.2%</td>
-                <td>46.2%</td>
-                <td>43.8%</td>
-                <td>40.1%</td>
-                <td>39.0%</td>
-                <td>50.1%</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td><b class="best-score-text">InternVL-1.5 🥉</b></td>
-                <td><a href="https://github.com/OpenGVLab/InternVL" class="ext-link" style="font-size: 16px;">Link</a>
-                </td>
-                <td>2024-06-13</td>
-                <td>59.5%</td>
-                <td>55.3%</td>
-                <td>50.1%</td>
-                <td>46.4%</td>
-                <td>45.2%</td>
-                <td>41.9%</td>
-                <td>39.5%</td>
-                <td>33.2%</td>
-                <td>31.6%</td>
-                <td>33.2%</td>
-                <td>30.1%</td>
-                <td>42.4%</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>LLaVA-1.6-34B</td>
-                <td><a href="https://llava-vl.github.io/" class="ext-link" style="font-size: 16px;">Link</a></td>
-                <td>2024-06-13</td>
-                <td>57.9%</td>
-                <td>53.5%</td>
-                <td>47.1%</td>
-                <td>38.6%</td>
-                <td>27.0%</td>
-                <td>8.2%</td>
-                <td>0.0%</td>
-                <td>0.0%</td>
-                <td>0.0%</td>
-                <td>0.0%</td>
-                <td>0.0%</td>
-                <td>21.1%</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>LLaVA-1.6-13B</td>
-                <td><a href="https://llava-vl.github.io/" class="ext-link" style="font-size: 16px;">Link</a></td>
-                <td>2024-06-13</td>
-                <td>47.0%</td>
-                <td>45.0%</td>
-                <td>41.6%</td>
-                <td>35.0%</td>
-                <td>24.3%</td>
-                <td>15.5%</td>
-                <td>5.7%</td>
-                <td>0.8%</td>
-                <td>0.2%</td>
-                <td>0.1%</td>
-                <td>0.0%</td>
-                <td>19.6%</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>VILA-13B</td>
-                <td><a href="https://github.com/Efficient-Large-Model/VILA" class="ext-link"
-                    style="font-size: 16px;">Link</a></td>
-                <td>2024-06-13</td>
-                <td>44.7%</td>
-                <td>39.3%</td>
-                <td>34.9%</td>
-                <td>28.3%</td>
-                <td>22.0%</td>
-                <td>8.9%</td>
-                <td>1.1%</td>
-                <td>0.2%</td>
-                <td>0.1%</td>
-                <td>0.0%</td>
-                <td>0.1%</td>
-                <td>16.3%</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>IDEFICS2</td>
-                <td><a href="https://huggingface.co/HuggingFaceM4/idefics2-8b" class="ext-link"
-                    style="font-size: 16px;">Link</a></td>
-                <td>2024-06-13</td>
-                <td>48.0%</td>
-                <td>33.8%</td>
-                <td>16.4%</td>
-                <td>13.8%</td>
-                <td>14.3%</td>
-                <td>1.2%</td>
-                <td>0.0%</td>
-                <td>0.0%</td>
-                <td>0.0%</td>
-                <td>0.0%</td>
-                <td>0.0%</td>
-                <td>11.6%</td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td>Emu2-Chat</td>
-                <td><a href="https://baaivision.github.io/emu2/" class="ext-link" style="font-size: 16px;">Link</a></td>
-                <td>2024-06-13</td>
-                <td>33.0%</td>
-                <td>27.8%</td>
-                <td>17.2%</td>
-                <td>5.9%</td>
-                <td>0.9%</td>
-                <td>0.0%</td>
-                <td>0.0%</td>
-                <td>0.0%</td>
-                <td>0.0%</td>
-                <td>0.0%</td>
-                <td>0.0%</td>
-                <td>7.7%</td>
-              </tr>
-            </table>
+            <div id="overall_test_leaderboard"></div>
 
             <div>
               <p>🚨 To submit your results to the leaderboard, please send to <a
@@ -788,7 +604,40 @@
         </div>
       </div>
 
-    </div>
+      <div class="columns is-centered">
+        <div class="column is-full has-text-centered content">
+          <h2 class="title is-3" id="leaderboard_test">Leaderboard on Retrieval-Text-Needle of Test split</h2>
+          <div class="content">
+            <div id="retrieval_text_test_leaderboard"></div>
+          </div>
+
+          <h2 class="title is-3" id="leaderboard_test">Leaderboard on Retrieval-Image-Needle of Test split</h2>
+          <div class="content">
+            <div id="retrieval_image_test_leaderboard"></div>
+          </div>
+
+          <h2 class="title is-3" id="leaderboard_test">Leaderboard on Counting-Text-Needle of Test split</h2>
+          <div class="content">
+            <div id="counting_text_test_leaderboard"></div>
+          </div>
+
+          <h2 class="title is-3" id="leaderboard_test">Leaderboard on Counting-Image-Needle of Test split</h2>
+          <div class="content">
+            <div id="counting_image_test_leaderboard"></div>
+          </div>
+
+          <h2 class="title is-3" id="leaderboard_test">Leaderboard on Reasoning-Text-Needle of Test split</h2>
+          <div class="content">
+            <div id="reasoning_text_test_leaderboard"></div>
+          </div>
+
+          <h2 class="title is-3" id="leaderboard_test">Leaderboard on Reasoning-Image-Needle of Test split</h2>
+          <div class="content">
+            <div id="reasoning_image_test_leaderboard"></div>
+          </div>
+        </div>
+
+      </div>
   </section>
 
 
